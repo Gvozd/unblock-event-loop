@@ -1,0 +1,39 @@
+{
+  "name": "unblock-event-loop",
+  "version": "0.0.1",
+  "description": "Unblock event loop with setImmediate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gvozd/unblock-event-loop.git"
+  },
+  "keywords": [
+    "unblock event loop",
+    "prevent event loop lag",
+    "performance",
+    "utility",
+    "block",
+    "unblock",
+    "lag",
+    "event",
+    "loop",
+    "event loop",
+    "event-loop",
+    "eventloop",
+    "async",
+    "promise",
+    "promises",
+    "await",
+    "wait",
+    "delay"
+  ],
+  "author": "Gvozd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gvozd/unblock-event-loop/issues"
+  },
+  "homepage": "https://github.com/Gvozd/unblock-event-loop#readme"
+}
