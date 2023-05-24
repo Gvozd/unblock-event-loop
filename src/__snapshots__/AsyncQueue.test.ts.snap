@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventLoopMonitor base 1`] = `
+[
+  "global start",
+  "global end of push tasks",
+  {
+    "taskStart": 1,
+  },
+  {
+    "taskEnd": 1,
+  },
+  {
+    "taskStart": 2,
+  },
+  {
+    "taskEnd": 2,
+  },
+  {
+    "tasksExecuted": [
+      2,
+      4,
+    ],
+  },
+  "global end",
+]
+`;
