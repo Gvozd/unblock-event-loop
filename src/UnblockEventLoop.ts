@@ -33,7 +33,10 @@ export class UnblockEventLoop extends EventEmitter{
         }
 
         next(void 0);
-        await Promise.resolve();
+
+        // already in microtasks, guarantee by AsyncQueue~push
+        // it allows you to wait for end of microtasks by process.nextTick
+        await new Promise(resolve => process.nextTick(resolve));
 
         const end = performance.now();
         if (end - this.start > this.threshold) {
