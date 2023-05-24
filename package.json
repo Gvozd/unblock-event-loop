@@ -1,6 +1,6 @@
 {
   "name": "unblock-event-loop",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Unblock event loop with setImmediate",
   "main": "index.js",
   "scripts": {
