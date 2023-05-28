@@ -13,7 +13,7 @@ describe('EventLoopMonitor', () => {
         const steps = [];
         var queue = new AsyncQueue(async function(data: number) {
             steps.push({taskStart: data});
-            await delay(100);
+            await delay(10);
             steps.push({taskEnd: data});
             return data * 2;
         });
