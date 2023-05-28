@@ -45,6 +45,23 @@ exports[`EventLoopMonitor base 1`] = `
 ]
 `;
 
+exports[`EventLoopMonitor race with external code base 1`] = `
+[
+  "before start",
+  "before unblock #1",
+  "after unblock #1",
+  "before unblock #2",
+  "external code 5",
+  "loop",
+  "after unblock #2",
+  "external code 4",
+  "loop",
+  "external code 3",
+  "external code 2",
+  "external code 1",
+]
+`;
+
 exports[`EventLoopMonitor task asynchronously blocking loop 1`] = `
 [
   "before start",

@@ -47,4 +47,41 @@ describe('EventLoopMonitor', () => {
         expect(steps, 'execution order').toMatchSnapshot();
         await delay(0);
     });
+    describe('race with external code',  () => {
+        it('base', async () => {
+            const steps = [];
+            steps.push('before start');
+
+            let externalCount = 5;
+            const externalEnd = new Promise((resolve) => {
+                setImmediate(function externalCode() {
+                    steps.push(`external code ${externalCount}`);
+                    externalCount--;
+                    const time = performance.now()
+                    while(performance.now() - time < 1);
+                    if (externalCount) {
+                        setImmediate(externalCode);
+                    } else {
+                        resolve(void 0);
+                    }
+                });
+            });
+
+            const unblockEventLoop = new UnblockEventLoop();
+            unblockEventLoop.addListener('loop', () => steps.push('loop'));
+            steps.push('before unblock #1');
+            await unblockEventLoop.unblock();
+            steps.push('after unblock #1');
+
+            const time = performance.now()
+            while(performance.now() - time < 1);
+            steps.push('before unblock #2');
+            await unblockEventLoop.unblock();
+            steps.push('after unblock #2');
+
+            await externalEnd;
+
+            expect(steps, 'execution order').toMatchSnapshot();
+        });
+    });
 });
