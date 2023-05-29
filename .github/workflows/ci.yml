@@ -5,6 +5,21 @@ on:
   pull_request:
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6
+          run_install: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+      - run: pnpm lint
+
   test:
     name: Test - ${{ matrix.os }}/node@${{ matrix.node-version }}
     strategy:
@@ -12,7 +27,6 @@ jobs:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
         node-version: [ 16.x, 18.x, latest ]
-
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3

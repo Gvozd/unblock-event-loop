@@ -4,6 +4,7 @@
   "description": "Unblock event loop with setImmediate",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "jest"
   },
   "repository": {
