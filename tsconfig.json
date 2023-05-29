@@ -2,7 +2,7 @@
   "files": [
     "node_modules/jest-expect-message/types/index.d.ts"
   ],
-  "include": ["src/**/*", "test/**/*"],
+  "include": ["**/*"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
