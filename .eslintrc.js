@@ -3,13 +3,19 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: 'standard-with-typescript',
+  extends: [
+    'standard-with-typescript',
+    'airbnb-base',
+  ],
   overrides: [
     {
       files: '*.ts',
       parserOptions: {
         project: './tsconfig.json',
       },
+      extends: [
+        'airbnb-typescript/base',
+      ],
       rules: {
         '@typescript-eslint/semi': [2, 'always'],
         '@typescript-eslint/comma-dangle': [2, 'always-multiline'],
