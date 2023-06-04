@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
+    "benchmark": "cd benchmark && docker compose up",
     "test": "jest"
   },
   "repository": {

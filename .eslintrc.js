@@ -10,6 +10,7 @@ module.exports = {
     'airbnb-base',
   ],
   overrides: [
+    { files: '*.mjs' },
     {
       files: '*.ts',
       parserOptions: {
