@@ -2,20 +2,20 @@ import { EventEmitter } from 'node:events';
 import AsyncQueue from './AsyncQueue';
 
 export default class UnblockEventLoop extends EventEmitter {
-  constructor(private readonly threshold: number = 1) {
-    super();
-    this.queue = new AsyncQueue(this.queueExecutor);
-  }
-
-  unblock = (): Promise<void> => new Promise((resolve) => {
-    void this.queue.push(resolve);
-  });
-
   private readonly queue: AsyncQueue<(data: undefined) => void, void>;
 
   private start: number | null = null;
 
   private timer: Promise<void> | null = null;
+
+  public constructor(private readonly threshold: number = 1) {
+    super();
+    this.queue = new AsyncQueue(this.queueExecutor);
+  }
+
+  public unblock = (): Promise<void> => new Promise((resolve) => {
+    void this.queue.push(resolve);
+  });
 
   private readonly queueExecutor = async (next: (data: undefined) => void): Promise<void> => {
     if (this.timer == null) {
