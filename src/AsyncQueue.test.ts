@@ -1,14 +1,7 @@
 import { setTimeout as delay } from 'timers/promises';
-import { AsyncQueue } from './AsyncQueue';
+import AsyncQueue from './AsyncQueue';
 
 describe('EventLoopMonitor', () => {
-  const jestConsole = console;
-  beforeAll(() => {
-    global.console = require('console');
-  });
-  afterAll(() => {
-    global.console = jestConsole;
-  });
   it('base', async () => {
     const steps = [];
     const queue = new AsyncQueue(async (data: number) => {

@@ -1,7 +1,7 @@
 import { EventEmitter } from 'node:events';
-import { AsyncQueue } from './AsyncQueue';
+import AsyncQueue from './AsyncQueue';
 
-export class UnblockEventLoop extends EventEmitter {
+export default class UnblockEventLoop extends EventEmitter {
   constructor(private readonly threshold: number = 1) {
     super();
     this.queue = new AsyncQueue(this.queueExecutor);

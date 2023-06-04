@@ -1,14 +1,7 @@
 import { setTimeout as delay } from 'timers/promises';
-import { UnblockEventLoop } from './UnblockEventLoop';
+import UnblockEventLoop from './UnblockEventLoop';
 
 describe('EventLoopMonitor', () => {
-  const jestConsole = console;
-  beforeAll(() => {
-    global.console = require('console');
-  });
-  afterAll(() => {
-    global.console = jestConsole;
-  });
   it('base', async () => {
     const steps = [];
     steps.push('before start');
@@ -38,6 +31,7 @@ describe('EventLoopMonitor', () => {
       await unblockEventLoop.unblock();
       steps.push(`afterLock: ${idx}`);
       const time = performance.now();
+      // eslint-disable-next-line no-await-in-loop
       while (performance.now() - time < 1) await Promise.resolve();
       steps.push(`afterExecution: ${idx}`);
       return idx;

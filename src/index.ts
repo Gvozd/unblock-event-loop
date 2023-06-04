@@ -1,5 +1,5 @@
-import { UnblockEventLoop } from './UnblockEventLoop';
+import UnblockEventLoop from './UnblockEventLoop';
 
-export { AsyncQueue } from './AsyncQueue';
-export { UnblockEventLoop } from './UnblockEventLoop';
+export { default as AsyncQueue } from './AsyncQueue';
+export { default as UnblockEventLoop } from './UnblockEventLoop';
 export const { unblock } = new UnblockEventLoop();

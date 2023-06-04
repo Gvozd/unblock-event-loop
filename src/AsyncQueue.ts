@@ -1,4 +1,4 @@
-export class AsyncQueue<D, R> {
+export default class AsyncQueue<D, R> {
   constructor(private readonly executor: (data: D) => Promise<R>) {
   }
 
