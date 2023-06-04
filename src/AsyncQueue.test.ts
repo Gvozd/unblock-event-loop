@@ -1,5 +1,5 @@
-import { AsyncQueue } from './AsyncQueue';
 import { setTimeout as delay } from 'timers/promises';
+import { AsyncQueue } from './AsyncQueue';
 
 describe('EventLoopMonitor', () => {
   const jestConsole = console;
@@ -11,7 +11,7 @@ describe('EventLoopMonitor', () => {
   });
   it('base', async () => {
     const steps = [];
-    const queue = new AsyncQueue(async function (data: number) {
+    const queue = new AsyncQueue(async (data: number) => {
       steps.push({ taskStart: data });
       await delay(10);
       steps.push({ taskEnd: data });

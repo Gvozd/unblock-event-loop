@@ -2,19 +2,19 @@ import { EventEmitter } from 'node:events';
 import { AsyncQueue } from './AsyncQueue';
 
 export class UnblockEventLoop extends EventEmitter {
-  constructor (private readonly threshold: number = 1) {
+  constructor(private readonly threshold: number = 1) {
     super();
     this.queue = new AsyncQueue(this.queueExecutor);
   }
 
-  unblock = (): Promise<void> => {
-    return new Promise((resolve) => {
-      void this.queue.push(resolve);
-    });
-  };
+  unblock = (): Promise<void> => new Promise((resolve) => {
+    void this.queue.push(resolve);
+  });
 
   private readonly queue: AsyncQueue<(data: undefined) => void, void>;
+
   private start: number | null = null;
+
   private timer: Promise<void> | null = null;
 
   private readonly queueExecutor = async (next: (data: undefined) => void): Promise<void> => {
@@ -36,7 +36,7 @@ export class UnblockEventLoop extends EventEmitter {
 
     // already in microtasks, guarantee by AsyncQueue~push
     // it allows you to wait for end of microtasks by process.nextTick
-    await new Promise(resolve => { process.nextTick(resolve); });
+    await new Promise((resolve) => { process.nextTick(resolve); });
 
     const end = performance.now();
     if (end - this.start > this.threshold) {

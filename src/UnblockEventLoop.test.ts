@@ -1,5 +1,5 @@
-import { UnblockEventLoop } from './UnblockEventLoop';
 import { setTimeout as delay } from 'timers/promises';
+import { UnblockEventLoop } from './UnblockEventLoop';
 
 describe('EventLoopMonitor', () => {
   const jestConsole = console;
@@ -54,7 +54,7 @@ describe('EventLoopMonitor', () => {
 
       let externalCount = 5;
       const externalEnd = new Promise((resolve) => {
-        setImmediate(function externalCode () {
+        setImmediate(function externalCode() {
           steps.push(`external code ${externalCount}`);
           externalCount--;
           const time = performance.now();

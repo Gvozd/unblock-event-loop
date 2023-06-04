@@ -17,8 +17,6 @@ module.exports = {
         'airbnb-typescript/base',
       ],
       rules: {
-        '@typescript-eslint/semi': [2, 'always'],
-        '@typescript-eslint/comma-dangle': [2, 'always-multiline'],
         '@typescript-eslint/promise-function-async': 0, // TODO - 2
       },
     },
@@ -28,7 +26,5 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    semi: [2, 'always'],
-    'comma-dangle': [2, 'always-multiline'],
   },
 };

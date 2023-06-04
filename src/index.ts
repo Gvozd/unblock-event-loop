@@ -2,4 +2,4 @@ import { UnblockEventLoop } from './UnblockEventLoop';
 
 export { AsyncQueue } from './AsyncQueue';
 export { UnblockEventLoop } from './UnblockEventLoop';
-export const unblock = new UnblockEventLoop().unblock;
+export const { unblock } = new UnblockEventLoop();
