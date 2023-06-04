@@ -31,7 +31,7 @@ export default {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
+  coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -135,7 +135,7 @@ export default {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  "setupFilesAfterEnv": ["jest-expect-message"],
+  setupFilesAfterEnv: ['jest-expect-message'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -170,12 +170,12 @@ export default {
   // testResultsProcessor: undefined,
 
   // This option allows use of a custom test runner
-  testRunner: "jasmine2",
+  testRunner: 'jasmine2',
 
   // A map from regular expressions to paths to transformers
   transform: {
-    "^.+\\.m?[tj]sx?$": [
-      "ts-jest",
+    '^.+\\.m?[tj]sx?$': [
+      'ts-jest',
     ],
   },
 
