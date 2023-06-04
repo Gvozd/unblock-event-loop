@@ -14,7 +14,7 @@ describe('EventLoopMonitor', () => {
     steps.push('before start');
     const unblockEventLoop = new UnblockEventLoop();
     unblockEventLoop.addListener('loop', () => steps.push('loop'));
-    const promises = Array(10).fill(void 0).map(async (el, idx) => {
+    const promises = Array(10).fill(undefined).map(async (el, idx) => {
       steps.push(`beforeLock: ${idx}`);
       await unblockEventLoop.unblock();
       steps.push(`afterLock: ${idx}`);
@@ -33,12 +33,12 @@ describe('EventLoopMonitor', () => {
     steps.push('before start');
     const unblockEventLoop = new UnblockEventLoop();
     unblockEventLoop.addListener('loop', () => steps.push('loop'));
-    const promises = Array(10).fill(void 0).map(async (el, idx) => {
+    const promises = Array(10).fill(undefined).map(async (el, idx) => {
       steps.push(`beforeLock: ${idx}`);
       await unblockEventLoop.unblock();
       steps.push(`afterLock: ${idx}`);
       const time = performance.now();
-      while (performance.now() - time < 1) await void 0;
+      while (performance.now() - time < 1) await Promise.resolve();
       steps.push(`afterExecution: ${idx}`);
       return idx;
     });
@@ -59,10 +59,10 @@ describe('EventLoopMonitor', () => {
           externalCount--;
           const time = performance.now();
           while (performance.now() - time < 1);
-          if (externalCount) {
+          if (externalCount > 0) {
             setImmediate(externalCode);
           } else {
-            resolve(void 0);
+            resolve(undefined);
           }
         });
       });

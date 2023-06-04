@@ -7,17 +7,17 @@ export class UnblockEventLoop extends EventEmitter {
     this.queue = new AsyncQueue(this.queueExecutor);
   }
 
-  unblock = () => {
+  unblock = (): Promise<void> => {
     return new Promise((resolve) => {
-      this.queue.push(resolve);
+      void this.queue.push(resolve);
     });
   };
 
-  private readonly queue: AsyncQueue<(data: void) => void, void>;
+  private readonly queue: AsyncQueue<(data: undefined) => void, void>;
   private start: number | null = null;
   private timer: Promise<void> | null = null;
 
-  private readonly queueExecutor = async (next: (data: void) => void) => {
+  private readonly queueExecutor = async (next: (data: undefined) => void): Promise<void> => {
     if (this.timer == null) {
       this.timer = new Promise((resolve) => {
         setImmediate(() => {
@@ -28,11 +28,11 @@ export class UnblockEventLoop extends EventEmitter {
         });
       });
     }
-    if (!this.start) {
+    if (this.start === null) {
       this.start = performance.now();
     }
 
-    next(void 0);
+    next(undefined);
 
     // already in microtasks, guarantee by AsyncQueue~push
     // it allows you to wait for end of microtasks by process.nextTick
