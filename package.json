@@ -2,6 +2,7 @@
   "name": "unblock-event-loop",
   "version": "0.1.0",
   "description": "Unblock event loop with setImmediate",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",

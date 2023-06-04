@@ -6,7 +6,7 @@ services:
     build:
       context: ..
       dockerfile: ./benchmark/Dockerfile
-    entrypoint: 'node ./benchmark/index.mjs'
+    entrypoint: 'pnpm exec ts-node --esm --transpileOnly ./benchmark/index.ts'
     networks:
       - node-network
     volumes:

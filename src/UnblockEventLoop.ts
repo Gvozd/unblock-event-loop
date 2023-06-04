@@ -1,5 +1,5 @@
 import { EventEmitter } from 'node:events';
-import AsyncQueue from './AsyncQueue';
+import AsyncQueue from './AsyncQueue.ts';
 
 export default class UnblockEventLoop extends EventEmitter {
   private readonly queue: AsyncQueue<(data: undefined) => void, void>;
