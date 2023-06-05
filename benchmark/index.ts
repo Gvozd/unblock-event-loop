@@ -8,7 +8,7 @@ import { unblock } from '../src/index.ts';
 
 const countOfServers = 3;
 const port = 8000;
-const requestTime = 500;
+const requestTime = 0;
 const url = `http://127.0.0.1:${port}/`;
 
 if (cluster.isPrimary) {
@@ -20,9 +20,10 @@ if (cluster.isPrimary) {
   await delay(1e3);
   console.log('base check', await request(url));
 
-  for (let count = 1000; count < 100e3; count += 1e3) {
+  for (let count = 2000; count < 40e3; count += 2000) {
     await test('simple', count, simpleRequest);
     await test('unblocked', count, unblockedRequest);
+    await delay(100);
   }
 
   process.exit(1);
@@ -37,11 +38,14 @@ if (cluster.isPrimary) {
 }
 
 async function test(name, count, executor) {
-  const title = `${name}:${count}`;
-  console.time(title);
+  const start = performance.now();
   const tasks = Array(count).fill(url).map(executor);
-  await Promise.all(tasks);
-  console.timeEnd(title);
+  try {
+    await Promise.all(tasks);
+  } catch(e) {
+    await delay(100);
+  }
+  console.log(`${name}:${count}: ${Math.round(performance.now() - start) / 1000}s`);
 }
 
 async function simpleRequest(testUrl) {
