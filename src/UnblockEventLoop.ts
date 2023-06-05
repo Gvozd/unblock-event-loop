@@ -8,7 +8,7 @@ export default class UnblockEventLoop extends EventEmitter {
 
   private timer: Promise<void> | null = null;
 
-  public constructor(private readonly threshold: number = 1) {
+  public constructor(private readonly threshold: number = 0.1) {
     super();
     this.queue = new AsyncQueue(this.queueExecutor);
   }
@@ -36,7 +36,8 @@ export default class UnblockEventLoop extends EventEmitter {
 
     // already in microtasks, guarantee by AsyncQueue~push
     // it allows you to wait for end of microtasks by process.nextTick
-    await new Promise((resolve) => { process.nextTick(resolve); });
+    // await new Promise((resolve) => { process.nextTick(resolve); });
+    await Promise.resolve();
 
     const end = performance.now();
     if (end - this.start > this.threshold) {
